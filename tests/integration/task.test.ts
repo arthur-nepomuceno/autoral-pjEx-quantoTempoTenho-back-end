@@ -1,12 +1,22 @@
+import supertest from "supertest";
+import { faker } from "@faker-js/faker"
+import app from "../../src/app"
+
+const agent = supertest(app);
+
 describe("TEST post/task", () => {
 
-    it("Return status 201 if task is registered successfully.", () => {
+    it("Expect status 201 if task is registered successfully.", async () => {
 
         const task = {
-            title: "test task",
-            timeSpam: 9999999,
-            deadline: 9999999
+            title: faker.datatype.string(),
+            timeSpan: faker.datatype.number(),
+            deadline: faker.datatype.number(),
         }
+
+        const response = await agent.post('/task').send(task);
+
+        expect(response.status).toEqual(201);
 
     })
 })
