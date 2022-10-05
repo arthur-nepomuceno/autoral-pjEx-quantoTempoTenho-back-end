@@ -10,9 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model tasks {
-  id          Int @id @default(autoincrement())
-  name        String
-  size        Int
-  deadline    DateTime
+model Tasks {
+  id        Int @id @default(autoincrement())
+  title     String
+  timeSpan  Int
+  deadline  Int
+
+  @@map("tasks")
 }
