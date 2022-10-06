@@ -1,22 +1,40 @@
 import supertest from "supertest";
-import { faker } from "@faker-js/faker"
-import app from "../../src/app"
+import app from "../../src/app";
+import * as taskFactory from "../factories/taskFactory";
+import { prisma } from "../../src/database/postgres";
 
 const agent = supertest(app);
 
-describe("TEST post/task", () => {
 
-    it("Expect status 201 if task is registered successfully.", async () => {
+beforeEach(async () => {
+    await prisma.$executeRaw`TRUNCATE TABLE tasks`;
+})
 
-        const task = {
-            title: faker.datatype.string(),
-            timeSpan: faker.datatype.number(),
-            deadline: faker.datatype.number(),
-        }
+afterAll(async () => {
+    await prisma.$disconnect();
+})
+
+describe('[TEST] Feature: tasks.', () => {
+
+    it('End-point: post/exam. Rule: must return status 201 for a task successfully created.', async () => {
+
+        const task = taskFactory.task;
 
         const response = await agent.post('/task').send(task);
 
         expect(response.status).toEqual(201);
+
+        
+    })
+
+    it('End-point: get/exams. Rule: must return tasks from the database.', async () => {
+
+        const task = taskFactory.task;
+
+        await agent.post('/task').send(task)
+        const response = await agent.get('/tasks');
+
+        expect(response.body.length).toEqual(1);
 
     })
 })
