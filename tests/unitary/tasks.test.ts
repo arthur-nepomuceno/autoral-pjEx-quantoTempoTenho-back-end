@@ -1,4 +1,4 @@
-import * as taskServices from "../../src/services/taskService"
+import * as taskServices from "../../src/services/taskServices"
 import * as taskRepository from "../../src/repositories/taskRepository"
 import * as taskFactory from "../factories/taskFactory"
 

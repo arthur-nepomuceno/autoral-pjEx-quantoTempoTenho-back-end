@@ -2,8 +2,9 @@ import { faker } from "@faker-js/faker"
 
 const task = {
     title: faker.datatype.string(),
-    timeSpan: faker.datatype.number(),
-    deadline: faker.datatype.number(),
+    days: faker.datatype.number(),
+    hours: faker.datatype.number(),
+    limit: faker.datatype.string(),
 }
 
 export {

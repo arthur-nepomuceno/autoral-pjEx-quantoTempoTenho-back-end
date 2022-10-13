@@ -1,7 +1,7 @@
 import { ObjectSchema } from "joi";
 import { Request, Response, NextFunction } from "express";
 
-async function checkSchema(schema: ObjectSchema) {
+function checkSchema(schema: ObjectSchema) {
     return (req: Request, res: Response, next: NextFunction) => {
 
         const isValid = schema.validate(req.body)

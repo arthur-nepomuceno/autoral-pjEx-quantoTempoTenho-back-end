@@ -1,7 +1,8 @@
 type ITaskData = {
     title: string,
-    timeSpan: number,
-    deadline: number
+    days: number,
+    hours: number,
+    limit: string
 }
 
 export {
